@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/fnameSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/lnameSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/idSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="@string/id"
+            android:inputType="number" />
+
+        <Button
+            android:text="@string/search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".25"
+            android:onClick="search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/options"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:onClick="sortFName"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/first_name" />
+
+        <Button
+            android:onClick="sortLName"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/last_name" />
+
+        <Button
+            android:onClick="sortDate"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/date" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="40"/>
+
+    <TextView
+        android:paddingHorizontal="5dp"
+        android:id="@+id/count"
+        android:textColor="#222222"
+        android:text="@string/customers"
+        android:textSize="17.5dp"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:onClick="add"
+        android:layout_weight="6"
+        android:text="@string/add_customer" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "466607298114",
+    "firebase_url": "https://opticsdatabase.firebaseio.com",
+    "project_id": "opticsdatabase",
+    "storage_bucket": "opticsdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466607298114:android:f48c5b3f6a54919b",
+        "android_client_info": {
+          "package_name": "com.example.liorkaramany.opticsdatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466607298114-8qceivvtb1bghs59unr3pvn43j6934ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5eEbxb7dkbGWqvt8oe9JtxX-JLnhKoVs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

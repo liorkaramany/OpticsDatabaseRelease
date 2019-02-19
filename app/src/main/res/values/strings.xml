@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">OpticsDatabase</string>
+    <string name="credits">This application is made by Lior Karamany.\n\nThe mentor teachers are Itzik Ben-Shitrit and Albert Levy.</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="id">ID</string>
+    <string name="search">Search</string>
+    <string name="date">Date</string>
+    <string name="customers">Customers: </string>
+    <string name="add_customer">Add customer</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="first_name_input">*First name</string>
+    <string name="last_name_input">*Last name</string>
+    <string name="customer_id_input">*Customer ID</string>
+    <string name="phone_number_input">*Phone number</string>
+    <string name="glasses">Glasses</string>
+    <string name="lens">Lens</string>
+    <string name="back">Back</string>
+    <string name="upload">Upload</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="capture">Capture</string>
+    <string name="currently_uploading">Image is currently being uploaded</string>
+    <string name="no_enough_info">You haven\'t entered the necessary information</string>
+    <string name="customer_edited">Customer has been edited</string>
+    <string name="customer_deleted">Customer has been deleted</string>
+    <string name="options_settings">Options</string>
+    <string name="view_document">View document</string>
+    <string name="edit_details">Edit details</string>
+    <string name="delete">Delete</string>
+    <string name="document">Document</string>
+    <string name="edit">Edit</string>
+    <string name="credits_option">Credits</string>
+    <string name="customer_uploaded">Customer has been uploaded</string>
+    <string name="push_failed">Push failed</string>
+    <string name="no_photo">You didn\'t capture a photo</string>
+    <string name="image_uploaded">Image is currently being uploaded</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="customer">Customer</string>
+    <string-array name="options_array">
+        <item>All</item>
+        <item>Glasses</item>
+        <item>Lens</item>
+    </string-array>
+</resources>

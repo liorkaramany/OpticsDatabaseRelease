@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpticsDatabase</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="id">ת\"ז</string>
+    <string name="search">חפש</string>
+    <string name="date">תאריך</string>
+    <string name="customers">"לקוחות: "</string>
+    <string name="add_customer">הוסף לקוח</string>
+    <string name="address">כתובת</string>
+    <string name="credits">האפליקציה הוכנה על ידי ליאור קרמני.\n\nהמורים המנטורים הם איציק בן-שטרית ואלברט לוי.</string>
+    <string name="city">עיר</string>
+    <string name="first_name_input">*שם פרטי</string>
+    <string name="last_name_input">*שם משפחה</string>
+    <string name="customer_id_input">*תעודת זהות</string>
+    <string name="phone_number_input">*טלפון</string>
+    <string name="glasses">משקפיים</string>
+    <string name="lens">עדשות</string>
+    <string name="back">הקודם</string>
+    <string name="upload">העלה</string>
+    <string-array name="options_array">
+        <item>הכל</item>
+        <item>משקפיים</item>
+        <item>עדשות</item>
+    </string-array>
+    <string name="mobile_number">טלפון נייד</string>
+    <string name="capture">צלם</string>
+    <string name="currently_uploading">התמונה כרגע מועלית</string>
+    <string name="no_enough_info">לא הכנסת את המידע הנחוץ</string>
+    <string name="options_settings">אפשרויות</string>
+    <string name="view_document">הצג מסמך</string>
+    <string name="edit_details">ערוך פרטים</string>
+    <string name="delete">מחק</string>
+    <string name="document">מסמך</string>
+    <string name="edit">ערוך</string>
+    <string name="credits_option">קרדיטים</string>
+    <string name="customer_uploaded">הלקוח הועלה</string>
+    <string name="push_failed">העלאה נכשלה</string>
+    <string name="no_photo">לא צילמת תמונה</string>
+    <string name="image_uploaded">התמונה כרגע מועלית</string>
+    <string name="save">שמור</string>
+    <string name="cancel">בטל</string>
+    <string name="customer_edited">הלקוח נערך</string>
+    <string name="customer_deleted">הלקוח נמחק</string>
+    <string name="close">סגור</string>
+    <string name="customer">לקוח</string>
+
+</resources>
