@@ -238,7 +238,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
-        Customer customer = customerList.get(index);
+        final Customer customer = customerList.get(index);
 
         String option = item.getTitle().toString();
         if (option.equals(getString(R.string.edit_details)))
@@ -247,12 +247,26 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         }
         else if (option.equals(getString(R.string.delete)))
         {
-            String id = customer.getId();
-            ref.child(id).removeValue();
-            imgRef.child(id).removeValue();
-            StorageReference r = FirebaseStorage.getInstance().getReference("customers").child(id);
-            r.delete();
-            Toast.makeText(this, getString(R.string.customer_deleted), Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+            adb.setTitle(R.string.warning);
+            adb.setMessage(getString(R.string.delete_warning) + customer.getfName() + " " + customer.getlName() + "?");
+
+            adb.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteCustomer(customer);
+                }
+            });
+            adb.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog ad = adb.create();
+            ad.show();
         }
         else if (option.equals(getString(R.string.view_document)))
         {
@@ -260,6 +274,16 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    public void deleteCustomer(Customer customer)
+    {
+        String id = customer.getId();
+        ref.child(id).removeValue();
+        imgRef.child(id).removeValue();
+        StorageReference r = FirebaseStorage.getInstance().getReference("customers").child(id);
+        r.delete();
+        Toast.makeText(this, getString(R.string.customer_deleted), Toast.LENGTH_SHORT).show();
     }
 
     public void showDocument(Customer customer)

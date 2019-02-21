@@ -39,6 +39,10 @@
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="customer">Customer</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="warning">Warning</string>
+    <string name="delete_warning">"Are you sure you want to delete "</string>
     <string-array name="options_array">
         <item>All</item>
         <item>Glasses</item>

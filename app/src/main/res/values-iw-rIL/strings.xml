@@ -45,5 +45,9 @@
     <string name="customer_deleted">הלקוח נמחק</string>
     <string name="close">סגור</string>
     <string name="customer">לקוח</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="warning">אזהרה</string>
+    <string name="delete_warning">"אתה בטוח שאתה רוצה למחוק את "</string>
 
 </resources>
