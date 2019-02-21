@@ -264,15 +264,17 @@ public class Document extends AppCompatActivity {
                         }, 500);
 
                         if (sign == 0) {
-                            Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Document.this,
-                                    Main.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            startActivity(intent);
+                            //Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_SHORT).show();
+                            Intent intent = getIntent();
+                            /*intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);*/
+                            setResult(RESULT_OK, intent);
+                            finish();
                         }
                         else {
-                            Toast.makeText(Document.this, getString(R.string.customer_edited), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Document.this, getString(R.string.customer_edited), Toast.LENGTH_SHORT).show();
+                            Intent gt = getIntent();
+                            setResult(RESULT_OK, gt);
                             finish();
                         }
 

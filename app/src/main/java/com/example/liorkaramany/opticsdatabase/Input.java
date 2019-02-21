@@ -2,6 +2,7 @@ package com.example.liorkaramany.opticsdatabase;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -118,8 +119,10 @@ public class Input extends AppCompatActivity {
                 Customer customer = new Customer(id, fn, ln, cID, a, c, p, m, openDate, typeID);
                 dref.child(id).setValue(customer);
 
+                Intent gt = getIntent();
+                setResult(RESULT_OK, gt);
                 finish();
-                Toast.makeText(this, getString(R.string.customer_edited), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, getString(R.string.customer_edited), Toast.LENGTH_SHORT).show();
             }
             else {
 
@@ -140,8 +143,20 @@ public class Input extends AppCompatActivity {
                 t.putExtra("typeID", typeID);
                 //t.putExtra("sign", 1);
 
-                startActivity(t);
+                startActivityForResult(t, 0);
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (data != null)
+        {
+            Intent gt = getIntent();
+            setResult(RESULT_OK, gt);
+            finish();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

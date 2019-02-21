@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -204,7 +206,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         t.putExtra("openDate", customer.getOpenDate());
         t.putExtra("typeID", customer.getTypeID());
 
-        startActivity(t);
+        startActivityForResult(t, 1);
     }
 
     @Override
@@ -283,7 +285,10 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         imgRef.child(id).removeValue();
         StorageReference r = FirebaseStorage.getInstance().getReference("customers").child(id);
         r.delete();
-        Toast.makeText(this, getString(R.string.customer_deleted), Toast.LENGTH_SHORT).show();
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+        Snackbar snackbar = Snackbar.make(layout, R.string.customer_deleted, Snackbar.LENGTH_LONG);
+        snackbar.show();
+        //Toast.makeText(this, getString(R.string.customer_deleted), Toast.LENGTH_SHORT).show();
     }
 
     public void showDocument(Customer customer)
@@ -340,17 +345,15 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
                                 t.putExtra("url", url);
                                 t.putExtra("id", id);
                                 t.putExtra("sign", 1);
-                                startActivity(t);
+                                startActivityForResult(t, 2);
                             }
                         });
 
                         AlertDialog ad = adb.create();
                         ad.show();
                     }
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -360,7 +363,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
 
     public void add(View view) {
         Intent t = new Intent(this, Input.class);
-        startActivity(t);
+        startActivityForResult(t, 3);
     }
 
     @Override
@@ -493,6 +496,24 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         if (optionSpinner == 0)
             return true;
         return optionSpinner == customer.getTypeID();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Snackbar snackbar;
+            if (requestCode < 3) {
+                LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+                snackbar = Snackbar.make(layout, R.string.customer_edited, Snackbar.LENGTH_LONG);
+            }
+            else {
+                LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+                snackbar = Snackbar.make(layout, R.string.customer_uploaded, Snackbar.LENGTH_LONG);
+            }
+            snackbar.show();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     //Listeners for the options spinner.
