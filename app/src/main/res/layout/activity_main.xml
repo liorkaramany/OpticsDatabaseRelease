@@ -42,12 +42,6 @@
             android:hint="@string/id"
             android:inputType="number" />
 
-        <Button
-            android:text="@string/search"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight=".25"
-            android:onClick="search" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,6 +102,7 @@
         android:layout_height="0dp"
         android:onClick="add"
         android:layout_weight="6"
+        android:theme="@style/PrimaryButton"
         android:text="@string/add_customer" />
 
 </LinearLayout>
