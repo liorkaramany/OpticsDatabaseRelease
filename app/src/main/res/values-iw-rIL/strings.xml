@@ -26,10 +26,10 @@
     </string-array>
     <string name="mobile_number">טלפון נייד</string>
     <string name="capture">צלם</string>
-    <string name="currently_uploading">התמונה כרגע מועלית</string>
+    <string name="currently_uploading">המסמך כרגע מועלה</string>
     <string name="no_enough_info">לא הכנסת את המידע הנחוץ</string>
     <string name="options_settings">אפשרויות</string>
-    <string name="view_document">הצג מסמך</string>
+    <string name="view_document">הצג מסמכים</string>
     <string name="edit_details">ערוך פרטים</string>
     <string name="delete">מחק</string>
     <string name="document">מסמך</string>
@@ -38,7 +38,7 @@
     <string name="customer_uploaded">הלקוח הועלה</string>
     <string name="push_failed">העלאה נכשלה</string>
     <string name="no_photo">לא צילמת תמונה</string>
-    <string name="image_uploaded">התמונה כרגע מועלית</string>
+    <string name="image_uploaded">המסמך כרגע מועלה</string>
     <string name="save">שמור</string>
     <string name="cancel">בטל</string>
     <string name="customer_edited">הלקוח נערך</string>
@@ -49,5 +49,9 @@
     <string name="no">לא</string>
     <string name="warning">אזהרה</string>
     <string name="delete_warning">"אתה בטוח שאתה רוצה למחוק את "</string>
+    <string name="add">הוסף</string>
+    <string name="doc_edited">המסמך נערך</string>
+    <string name="doc_uploaded">המסמך הועלה</string>
+    <string name="doc_deleted">המסמך נמחק</string>
 
 </resources>

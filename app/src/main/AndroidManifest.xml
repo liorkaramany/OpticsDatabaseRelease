@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.liorkaramany.opticsdatabase">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main" android:windowSoftInputMode="adjustPan">
+        <activity android:name=".DocumentsList"></activity>
+        <activity
+            android:name=".Main"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +24,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Credits" />
-        <activity android:name=".Input" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Document"></activity>
+        <activity
+            android:name=".Input"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Document" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -32,9 +36,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>

@@ -20,12 +20,12 @@
     <string name="upload">Upload</string>
     <string name="mobile_number">Mobile number</string>
     <string name="capture">Capture</string>
-    <string name="currently_uploading">Image is currently being uploaded</string>
+    <string name="currently_uploading">The document is currently being uploaded</string>
     <string name="no_enough_info">You haven\'t entered the necessary information</string>
     <string name="customer_edited">Customer has been edited</string>
     <string name="customer_deleted">Customer has been deleted</string>
     <string name="options_settings">Options</string>
-    <string name="view_document">View document</string>
+    <string name="view_document">View documents</string>
     <string name="edit_details">Edit details</string>
     <string name="delete">Delete</string>
     <string name="document">Document</string>
@@ -34,7 +34,7 @@
     <string name="customer_uploaded">Customer has been uploaded</string>
     <string name="push_failed">Push failed</string>
     <string name="no_photo">You didn\'t capture a photo</string>
-    <string name="image_uploaded">Image is currently being uploaded</string>
+    <string name="image_uploaded">The document is currently being uploaded</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
@@ -43,9 +43,13 @@
     <string name="no">No</string>
     <string name="warning">Warning</string>
     <string name="delete_warning">"Are you sure you want to delete "</string>
+    <string name="add">Add</string>
+    <string name="doc_edited">The document has been edited</string>
     <string-array name="options_array">
         <item>All</item>
         <item>Glasses</item>
         <item>Lens</item>
     </string-array>
+    <string name="doc_uploaded">The document has been uploaded</string>
+    <string name="doc_deleted">The document has been deleted</string>
 </resources>

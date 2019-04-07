@@ -335,9 +335,27 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     {
         String id = customer.getId();
         ref.child(id).removeValue();
+
+        imgRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren())
+                {
+                    String url = ds.getValue(Image.class).getUrl();
+                    StorageReference r = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+                    r.delete();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         imgRef.child(id).removeValue();
-        StorageReference r = FirebaseStorage.getInstance().getReference("customers").child(id);
-        r.delete();
+        /*StorageReference r = FirebaseStorage.getInstance().getReference("customers").child(id);
+        r.delete();*/
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         Snackbar snackbar = Snackbar.make(layout, R.string.customer_deleted, Snackbar.LENGTH_LONG);
         snackbar.show();
@@ -347,64 +365,42 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     public void showDocument(Customer customer)
     {
         final String id = customer.getId();
-        imgRef.addListenerForSingleValueEvent( new ValueEventListener() {
+
+        Intent t = new Intent(this, DocumentsList.class);
+        t.putExtra("id", id);
+        startActivity(t);
+
+        /*final List<Image> documents = new ArrayList<>();
+
+        documents.clear();
+
+        imgRef.child(id).addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot customerSnapshot : dataSnapshot.getChildren()) {
                     Image image = customerSnapshot.getValue(Image.class);
 
-                    if (id.equals(image.getId())) {
-                        AlertDialog.Builder adb = new AlertDialog.Builder(Main.this);
+                    documents.add(image);
+                    /*final String url = image.getUrl();
+                    String d = image.getOpenDate();
+                    //date.setText(d);
 
-                        LayoutInflater inflater = Main.this.getLayoutInflater();
-                        View dialogView = inflater.inflate(R.layout.img_layout, null);
-                        adb.setView(dialogView);
+                    //Fit the image into the document ImageView.
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                    int width = metrics.widthPixels;
+                    int height = metrics.heightPixels;
+                    final Point point = new Point(width, height);
 
-                        PhotoView document = dialogView.findViewById(R.id.document);
-                        TextView date = dialogView.findViewById(R.id.date);
+                    final int size = (int) Math.ceil(Math.sqrt(width * height));
+                    Picasso.get()
+                            .load(url)
+                            .resize(size, size)
+                            .centerInside()
+                            .into(document);
 
-                        final String url = image.getUrl();
-                        String d = image.getOpenDate();
-                        date.setText(d);
-
-                        //Fit the image into the document ImageView.
-                        DisplayMetrics metrics = new DisplayMetrics();
-                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-                        int width = metrics.widthPixels;
-                        int height = metrics.heightPixels;
-                        final Point point = new Point(width, height);
-
-                        final int size = (int) Math.ceil(Math.sqrt(width * height));
-                        Picasso.get()
-                                .load(url)
-                                .resize(size, size)
-                                .centerInside()
-                                .into(document);
-
-                        //Picasso.get().load(url).into(document);
-
-                        adb.setTitle(R.string.document);
-                        adb.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        adb.setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent t = new Intent(Main.this, Document.class);
-                                t.putExtra("url", url);
-                                t.putExtra("id", id);
-                                t.putExtra("sign", 1);
-                                startActivityForResult(t, 2);
-                            }
-                        });
-
-                        AlertDialog ad = adb.create();
-                        ad.show();
-                    }
+                    //Picasso.get().load(url).into(document);
                 }
             }
             @Override
@@ -412,6 +408,38 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
 
             }
         });
+
+        AlertDialog.Builder adb = new AlertDialog.Builder(Main.this);
+        LayoutInflater inflater = Main.this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.image_list, null);
+        adb.setView(dialogView);
+
+        ListView imgList = dialogView.findViewById(R.id.img_list);
+
+        ImageList adapter = new ImageList(Main.this, documents);
+
+        imgList.setAdapter(adapter);
+
+        adb.setTitle(R.string.document);
+        adb.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        adb.setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                *//*Intent t = new Intent(Main.this, Document.class);
+                t.putExtra("url", url);
+                t.putExtra("id", id);
+                t.putExtra("sign", 1);
+                startActivityForResult(t, 2);
+            }
+        });
+
+        AlertDialog ad = adb.create();
+        ad.show();*/
     }
 
     public void add(View view) {

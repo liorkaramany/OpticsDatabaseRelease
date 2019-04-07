@@ -59,7 +59,7 @@ public class Document extends AppCompatActivity {
 
     StorageTask uploadTask;
 
-    String url, idFromIntent;
+    String url, idFromIntent, imgId;
 
     String fname, lname, customerID, address, city, phone, mobile;
     int typeID, sign;
@@ -97,9 +97,13 @@ public class Document extends AppCompatActivity {
             upload.setText(getString(R.string.save));
             back.setText(getString(R.string.cancel));
             url = gt.getStringExtra("url");
+            imgId = gt.getStringExtra("imgId");
             idFromIntent = gt.getStringExtra("id");
+
             Picasso.get().load(url).fit().centerInside().into(img);
         }
+        else if (sign == 2)
+            idFromIntent = gt.getStringExtra("id");
     }
 
     public void capture(View view) {
@@ -232,13 +236,22 @@ public class Document extends AppCompatActivity {
                 byte[] data = baos.toByteArray();
 
                 StorageReference tmpRef;
-                if (sign == 0) {
-                    id = ref.push().getKey();
-                    tmpRef = r.child(id);
-                }
-                else {
+                final String imgId;
+                if (sign == 1) {
                     id = idFromIntent;
+                    imgId = this.imgId;
                     tmpRef = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+                }
+                else if (sign == 2) {
+                    id = idFromIntent;
+                    imgId = ref.push().getKey();
+                    tmpRef = r.child(id).child(imgId);
+                }
+                else
+                {
+                    id = ref.push().getKey();
+                    imgId = ref.push().getKey();
+                    tmpRef = r.child(id).child(imgId);
                 }
 
                 uploadTask = tmpRef.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -249,9 +262,16 @@ public class Document extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 String url = uri.toString();
 
-                                if (sign == 0)
-                                    ref.child(id).setValue(new Customer(id, fname, lname, customerID, address, city, phone, mobile, typeID));
-                                imgRef.child(id).setValue(new Image(id, url));
+                                if (sign == 1) {
+                                    imgRef.child(id).child(imgId).setValue(new Image(imgId, url));
+                                }
+                                else {
+
+                                    imgRef.child(id).push().getKey();
+                                    if (sign == 0)
+                                        ref.child(id).setValue(new Customer(id, fname, lname, customerID, address, city, phone, mobile, typeID));
+                                }
+                                imgRef.child(id).child(imgId).setValue(new Image(imgId, url));
                             }
                         });
 
@@ -263,7 +283,7 @@ public class Document extends AppCompatActivity {
                             }
                         }, 500);
 
-                        if (sign == 0) {
+                        if (sign != 1) {
                             //Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_SHORT).show();
                             Intent intent = getIntent();
                             /*intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
