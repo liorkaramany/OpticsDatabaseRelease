@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import id.zelory.compressor.Compressor;
+
 public class Document extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -232,7 +234,7 @@ public class Document extends AppCompatActivity {
                 final String id;
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                image.compress(Bitmap.CompressFormat.JPEG, 80, baos);
                 byte[] data = baos.toByteArray();
 
                 StorageReference tmpRef;
@@ -260,6 +262,7 @@ public class Document extends AppCompatActivity {
                         taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
+
                                 String url = uri.toString();
 
                                 if (sign == 1) {
@@ -275,13 +278,13 @@ public class Document extends AppCompatActivity {
                             }
                         });
 
-                        Handler handler = new Handler();
+                        /*Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 progressBar.setProgress(0);
                             }
-                        }, 500);
+                        }, 500);*/
 
                         if (sign != 1) {
                             //Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_SHORT).show();
