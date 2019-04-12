@@ -266,7 +266,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     protected void onStart() {
         super.onStart();
 
-        ref.addValueEventListener(new ValueEventListener() {
+        sortList();
+        /*ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 sortList();
@@ -276,7 +277,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
     @Override
