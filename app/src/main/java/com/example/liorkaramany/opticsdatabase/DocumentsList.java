@@ -2,6 +2,7 @@ package com.example.liorkaramany.opticsdatabase;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,8 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
     StorageReference imgRef;
     ListView imgList;
 
+    ConnectionReceiver connectionReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,22 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
 
         imgList.setOnItemClickListener(this);
         imgList.setOnCreateContextMenuListener(this);
+
+        connectionReceiver = new ConnectionReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(connectionReceiver);
     }
 
     @Override

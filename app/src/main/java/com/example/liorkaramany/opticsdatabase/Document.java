@@ -2,6 +2,7 @@ package com.example.liorkaramany.opticsdatabase;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
@@ -66,6 +67,8 @@ public class Document extends AppCompatActivity {
     String fname, lname, customerID, address, city, phone, mobile;
     int typeID, sign;
 
+    ConnectionReceiver connectionReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +109,22 @@ public class Document extends AppCompatActivity {
         }
         else if (sign == 2)
             idFromIntent = gt.getStringExtra("id");
+
+        connectionReceiver = new ConnectionReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(connectionReceiver);
     }
 
     public void capture(View view) {

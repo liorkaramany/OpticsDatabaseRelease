@@ -1,6 +1,7 @@
 package com.example.liorkaramany.opticsdatabase;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class Input extends AppCompatActivity {
     int sign;
 
     ArrayList<Image> imageList;
+
+    ConnectionReceiver connectionReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,22 @@ public class Input extends AppCompatActivity {
 
             //url = gt.getStringExtra("url");
         }
+
+        connectionReceiver = new ConnectionReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(connectionReceiver);
     }
 
     public void back(View view) {

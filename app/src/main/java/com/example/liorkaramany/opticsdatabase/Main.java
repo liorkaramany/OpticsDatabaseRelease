@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
@@ -67,6 +68,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     List<Customer> customerList;
 
     int option, optionSpinner;
+
+    ConnectionReceiver connectionReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,6 +232,22 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
                 ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
             }
         }
+
+        connectionReceiver = new ConnectionReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(connectionReceiver);
     }
 
     public static boolean hasPermissions(Context context, String... permissions) {

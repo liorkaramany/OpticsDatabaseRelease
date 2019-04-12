@@ -53,5 +53,7 @@
     <string name="doc_edited">המסמך נערך</string>
     <string name="doc_uploaded">המסמך הועלה</string>
     <string name="doc_deleted">המסמך נמחק</string>
+    <string name="error">שגיאה</string>
+    <string name="no_connection">אין חיבור לאינטרנט</string>
 
 </resources>

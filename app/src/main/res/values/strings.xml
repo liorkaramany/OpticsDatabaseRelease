@@ -52,4 +52,6 @@
     </string-array>
     <string name="doc_uploaded">The document has been uploaded</string>
     <string name="doc_deleted">The document has been deleted</string>
+    <string name="error">Error</string>
+    <string name="no_connection">There is no internet connection</string>
 </resources>
