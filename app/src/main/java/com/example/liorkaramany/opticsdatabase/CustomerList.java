@@ -1,6 +1,7 @@
 package com.example.liorkaramany.opticsdatabase;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -39,6 +41,13 @@ public class CustomerList extends ArrayAdapter<Customer> {
         TextView customerID = (TextView) listViewItem.findViewById(R.id.customerID);
         TextView phone = (TextView) listViewItem.findViewById(R.id.phone);
         TextView mobile = (TextView) listViewItem.findViewById(R.id.mobile);
+
+        LinearLayout layout = (LinearLayout) listViewItem.findViewById(R.id.layout);
+
+        if (position % 2 == 0)
+            layout.setBackgroundColor(Color.parseColor("#d9e3f4"));
+        else
+            layout.setBackgroundColor(Color.parseColor("#ffffff"));
 
         RadioButton glasses = (RadioButton) listViewItem.findViewById(R.id.glasses);
         RadioButton lens = (RadioButton) listViewItem.findViewById(R.id.lens);

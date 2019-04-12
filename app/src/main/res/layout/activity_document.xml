@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/wall"
     tools:context=".Document">
 
     <Space
@@ -15,6 +16,7 @@
 
     <Button
         android:onClick="capture"
+        android:theme="@style/PrimaryButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -35,6 +37,7 @@
 
         <Button
             android:id="@+id/back"
+            android:theme="@style/AccentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="back"
@@ -43,6 +46,7 @@
 
         <Button
             android:id="@+id/upload"
+            android:theme="@style/AccentButton"
             android:onClick="upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

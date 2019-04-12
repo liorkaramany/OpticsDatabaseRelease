@@ -2,6 +2,7 @@ package com.example.liorkaramany.opticsdatabase;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -43,6 +45,13 @@ public class ImageList extends ArrayAdapter<Image> {
         ImageView document = (ImageView) listViewItem.findViewById(R.id.document);
 
         TextView date = (TextView) listViewItem.findViewById(R.id.date);
+
+        LinearLayout layout = (LinearLayout) listViewItem.findViewById(R.id.layout);
+
+        if (position % 2 == 0)
+            layout.setBackgroundColor(Color.parseColor("#d9e3f4"));
+        else
+            layout.setBackgroundColor(Color.parseColor("#ffffff"));
 
         Image image = imageList.get(position);
 

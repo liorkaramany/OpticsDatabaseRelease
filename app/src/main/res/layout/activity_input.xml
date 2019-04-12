@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/wall"
     tools:context=".Input">
 
     <LinearLayout
@@ -115,12 +116,14 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/AccentButton"
             android:onClick="back"
             android:layout_weight="1"
             android:text="@string/back" />
 
         <Button
             android:id="@+id/rightBtn"
+            android:theme="@style/AccentButton"
             android:onClick="upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
