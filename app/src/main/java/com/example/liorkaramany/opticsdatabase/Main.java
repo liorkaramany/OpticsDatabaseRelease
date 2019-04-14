@@ -54,23 +54,75 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an activity which displays all the documents of a customer and to maintain these documents.
+ */
 public class Main extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    /**
+     * The list which contains all the customers.
+     */
     ListView list;
+    /**
+     * A Spinner that shows the options to only show customers with a specific type of equipment.
+     */
     Spinner options;
+    /**
+     * A TextView which shows how many customers there are in the database.
+     */
     TextView count;
 
+    /**
+     * A Database reference to the branch containing the customers.
+     */
     DatabaseReference ref;
+    /**
+     * A Database reference to the branch containing the customers' documents.
+     */
     DatabaseReference imgRef;
 
-    EditText fnameSearch, lnameSearch, idSearch;
+    /**
+     * An EditText which contains the first name of the customer to search.
+     */
+    EditText fnameSearch;
 
+    /**
+     * An EditText which contains the last name of the customer to search.
+     */
+    EditText lnameSearch;
+
+    /**
+     * An EditText which contains the personal ID of the customer to search.
+     */
+    EditText idSearch;
+
+    /**
+     * The list which contains all the customers.
+     */
     List<Customer> customerList;
 
-    int option, optionSpinner;
+    /**
+     * A value which tells the ListView what to sort the list by.
+     */
+    int option;
 
+    /**
+     * The list which contains all the customer's documents.
+     */
+    int optionSpinner;
+
+    /**
+     * The ConnectionReceiver listener that listens to the connectivity of the application.
+     */
     ConnectionReceiver connectionReceiver;
 
+    /**
+     * Initializes the activity, the widgets, the reference and the connectionReceiver, shows a dialog containing information about the selected customer and automatically searches when information is entered in the fields.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,6 +288,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         connectionReceiver = new ConnectionReceiver();
     }
 
+    /**
+     * Registers the receiver when the application resumes the activity.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -243,6 +298,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    /**
+     * Unregisters the receiver when the application stops the activity.
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -250,6 +308,13 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         unregisterReceiver(connectionReceiver);
     }
 
+    /**
+     * Checks if the application has all the necessary permissions granted.
+     *
+     * @param context the context in which the permissions are asked.
+     * @param permissions an array of all the requested permissions.
+     * @return true if all the permissions are granted, and false otherwise.
+     */
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
             for (String permission : permissions) {
@@ -261,7 +326,11 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         return true;
     }
 
-
+    /**
+     * Passes the customer's information to the Input activity and starts it.
+     *
+     * @param customer the customer that will be edited.
+     */
     public void editCustomer(Customer customer)
     {
         Intent t = new Intent(Main.this, Input.class);
@@ -281,6 +350,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         startActivityForResult(t, 1);
     }
 
+    /**
+     * Updates the list when the activity is started.
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -299,6 +371,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         });*/
     }
 
+    /**
+     * Shows the options to view the selected customer, view the documents of a customer, edit him or delete him when the user long-presses on a customer in the list.
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -309,6 +384,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         menu.add(getString(R.string.delete));
     }
 
+    /**
+     * Shows information about the customer, edits him, deletes him, or goes to the DocumentsList activity to show the user's documents, according to the user's selection.
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -351,6 +429,11 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         return super.onContextItemSelected(item);
     }
 
+    /**
+     * Deletes the customer and its documents.
+     *
+     * @param customer the customer that will be deleted.
+     */
     public void deleteCustomer(Customer customer)
     {
         String id = customer.getId();
@@ -382,6 +465,11 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         //Toast.makeText(this, getString(R.string.customer_deleted), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Passes the customer's ID to DocumentsList activity and starts it.
+     *
+     * @param customer the customer that its documents will be shown.
+     */
     public void showDocument(Customer customer)
     {
         final String id = customer.getId();
@@ -462,11 +550,17 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         ad.show();*/
     }
 
+    /**
+     * Starts the Input activity.
+     */
     public void add(View view) {
         Intent t = new Intent(this, Input.class);
         startActivityForResult(t, 3);
     }
 
+    /**
+     * Displays options when the user clicks the options button.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -475,6 +569,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Starts the Credits activity after the user selects the option in the options menu.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -488,6 +585,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
 
+    /**
+     * Counts how many customers there are and displays this amount in a TextView.
+     */
     public void count()
     {
         ref.addValueEventListener(new ValueEventListener() {
@@ -505,6 +605,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         });
     }
 
+    /**
+     * Adds all the documents of the current customer to the list and displays them according to the way the user decided to sort them, and only displays the customers which meet the searching criteria.
+     */
     public void sortList()
     {
         count();
@@ -551,25 +654,45 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
 
     }
 
+    /**
+     * Tells the application to sort the list by first names.
+     */
     public void sortFName(View view) {
         option = 0;
         sortList();
     }
 
+    /**
+     * Tells the application to sort the list by last names.
+     */
     public void sortLName(View view) {
         option = 1;
         sortList();
     }
 
+    /**
+     * Tells the application to sort the list by date of uploading.
+     */
     public void sortDate(View view) {
         option = 2;
         sortList();
     }
 
+    /**
+     * Returns a string array that is used in the searching process.
+     * @return an array which contains all the necessary information about the customer.
+     */
     private String[] getSearchStringArray() {
         return new String[] {fnameSearch.getText().toString(), lnameSearch.getText().toString(), idSearch.getText().toString()};
     }
 
+    /**
+     * Tells if a customer meets the searching criteria.
+     *
+     * @param customer the customer that is checked.
+     * @param s a string array which contain the searching criteria.
+     * @return true if the customer meets the searching criteria, and false otherwise.
+     */
     public boolean searchCustomer(Customer customer, String[] s)
     {
         String[] attributes = new String[3];
@@ -587,6 +710,12 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         return true;
     }
 
+    /**
+     * Checks whether a customer meets the type criteria.
+     *
+     * @param customer the customer which is checked
+     * @return true if the customer meets the type criteria, and false otherwise.
+     */
     public boolean checkOption(Customer customer)
     {
         if (optionSpinner == 0)
@@ -594,6 +723,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         return optionSpinner == customer.getTypeID();
     }
 
+    /**
+     * Shows a message after a customer has been added or after a customer has been edited.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
@@ -613,6 +745,9 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
     //Listeners for the options spinner.
+    /**
+     * Get the selected type from the Spinner and update the list.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         optionSpinner = position;

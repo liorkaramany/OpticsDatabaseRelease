@@ -22,11 +22,33 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an ArrayAdapter that is linked to an activity with the ListView and to the images list.
+ */
 public class ImageList extends ArrayAdapter<Image> {
 
+    /**
+     * The activity which contains the ListView.
+     */
     private Activity context;
+    /**
+     * The list which contains the images.
+     */
     private List<Image> imageList;
 
+    /**
+     * A constructor of the Image class.
+     *
+     * This function creates an ImageList ArrayAdapter with all the given parameters.
+     *
+     * @param context The activity which contains the ListView.
+     * @param imageList The list which contains the images.
+     * @return A reference to the created ImageList ArrayAdapter.
+     */
     public ImageList(Activity context, List<Image> imageList)
     {
         super(context, R.layout.img_layout, imageList);
@@ -34,6 +56,12 @@ public class ImageList extends ArrayAdapter<Image> {
         this.imageList = imageList;
     }
 
+    /**
+     * Sets up the view that will be displayed in each row of the ListView.
+     *
+     * @param position the index of the Image in the list.
+     * @return the view which the ListView displays.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

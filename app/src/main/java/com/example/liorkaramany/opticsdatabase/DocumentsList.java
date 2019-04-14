@@ -31,15 +31,44 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an activity which displays all the documents of a customer and to maintain these documents.
+ */
 public class DocumentsList extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    /**
+     * The list which contains all the customer's documents.
+     */
     List<Image> documents;
+
+    /**
+     * A Database reference to the branch containing the current customer's documents.
+     */
     DatabaseReference ref;
+
+    /**
+     * A Storage reference to the branch containing the current customer's documents.
+     */
     StorageReference imgRef;
+
+    /**
+     * A ListView that displays the documents of the current customer.
+     */
     ListView imgList;
 
+    /**
+     * The ConnectionReceiver listener that listens to the connectivity of the application.
+     */
     ConnectionReceiver connectionReceiver;
 
+
+    /**
+     * Initializes the activity, the widgets, the references and the connectionReceiver, gets the ID of the customer from the previous activity and assigns the listeners to the ListView.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +88,9 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         connectionReceiver = new ConnectionReceiver();
     }
 
+    /**
+     * Registers the receiver when the application resumes the activity.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -66,6 +98,9 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    /**
+     * Unregisters the receiver when the application stops the activity.
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -73,12 +108,18 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         unregisterReceiver(connectionReceiver);
     }
 
+    /**
+     * Updates the list when the activity is started.
+     */
     @Override
     protected void onStart() {
         super.onStart();
         updateList();
     }
 
+    /**
+     * Adds all the documents of the current customer to the list and displays them inside the ListView.
+     */
     private void updateList() {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,10 +141,16 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
+    /**
+     * Goes back to the previous activity.
+     */
     public void back(View view) {
         finish();
     }
 
+    /**
+     * Shows a dialog with the selected document inside, with an option to edit the document when the user selects a document from the list.
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -156,24 +203,31 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         ad.show();
     }
 
+    /**
+     * Shows the options to view the selected document, edit it or delete it when the user long-presses on a document in the list.
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         menu.setHeaderTitle(getString(R.string.options_settings));
-        menu.add(getString(R.string.view_document));
+        //menu.add(getString(R.string.view_document));
         menu.add(getString(R.string.edit));
         menu.add(getString(R.string.delete));
     }
 
+
+    /**
+     * Deletes the document or edits it, according to the user's selection.
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
         final Image image = documents.get(index);
-        String id = image.getId();
-        String url = image.getUrl();
+        //String id = image.getId();
+        //String url = image.getUrl();
 
         String option = item.getTitle().toString();
         if (option.equals(getString(R.string.delete)))
@@ -184,6 +238,9 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         return super.onContextItemSelected(item);
     }
 
+    /**
+     * Passes the customer's ID and information about the document to the Documents activity and starts it.
+     */
     private void editDocument(Image image) {
         String customerId = getIntent().getStringExtra("id");
         String imgId = image.getId();
@@ -197,6 +254,9 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         startActivityForResult(t, 2);
     }
 
+    /**
+     * Shows a message after the user adds a new document or updates an existing one.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,6 +279,10 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         }
     }
 
+
+    /**
+     * Deletes the document from the Database and from the Storage Database, and displays an appropriate message.
+     */
     private void deleteDocument(Image image) {
         String id = image.getId();
         ref.child(id).removeValue();
@@ -230,6 +294,9 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         snackbar.show();
     }
 
+    /**
+     * Passes the customer's ID to the Documents activity and starts it.
+     */
     public void add(View view) {
         String customerId = getIntent().getStringExtra("id");
         Intent t = new Intent(this, Document.class);

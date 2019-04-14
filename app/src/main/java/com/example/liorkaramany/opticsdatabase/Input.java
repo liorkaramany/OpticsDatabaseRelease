@@ -24,24 +24,90 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an activity which lets the user enter the credentials of a new customer, or edit the credentials of an existing customer.
+ */
 public class Input extends AppCompatActivity {
 
-    EditText fname, lname, customerID, address, city, phone, mobile;
+    /**
+     * An EditText which contains the first name of the customer.
+     */
+    EditText fname;
+    /**
+     * An EditText which contains the last name of the customer.
+     */
+    EditText lname;
+    /**
+     * An EditText which contains the personal ID of the customer.
+     */
+    EditText customerID;
+    /**
+     * An EditText which contains the address of the customer.
+     */
+    EditText address;
+    /**
+     * An EditText which contains the city of the customer.
+     */
+    EditText city;
+    /**
+     * An EditText which contains the phone number of the customer.
+     */
+    EditText phone;
+    /**
+     * An EditText which contains the mobile phone number of the customer.
+     */
+    EditText mobile;
+    /**
+     * A RadioGroup which contains the glasses and lens RadioButtons.
+     */
     RadioGroup options;
-    RadioButton glasses, lens;
+    /**
+     * A RadioButton of the glasses.
+     */
+    RadioButton glasses;
+    /**
+     * A RadioButton of the lens.
+     */
+    RadioButton lens;
 
+    /**
+     * A Database reference to the customers branch if the user is currently editing an existing customer.
+     */
     DatabaseReference dref;
 
+    /**
+     * The right button in the activity.
+     */
     Button rightBtn;
 
+    /**
+     * The type of equipment that an existing customer bought.
+     */
     int typeID;
+    /**
+     * The ID of an existing customer.
+     */
     String id/*, url*/;
+    /**
+     * A sign which tells whether a user is creating a new customer or editing an existing one.
+     * 0 = creating, 1 = editing.
+     */
     int sign;
 
-    ArrayList<Image> imageList;
+    //ArrayList<Image> imageList;
 
+    /**
+     * The ConnectionReceiver listener that listens to the connectivity of the application.
+     */
     ConnectionReceiver connectionReceiver;
 
+    /**
+     * Initializes the activity, the widgets, the reference and the connectionReceiver, gets the information passed from the previous activity and sets them inside the appropriate variables.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +159,9 @@ public class Input extends AppCompatActivity {
         connectionReceiver = new ConnectionReceiver();
     }
 
+    /**
+     * Registers the receiver when the application resumes the activity.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -100,6 +169,9 @@ public class Input extends AppCompatActivity {
         registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    /**
+     * Unregisters the receiver when the application stops the activity.
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -107,10 +179,16 @@ public class Input extends AppCompatActivity {
         unregisterReceiver(connectionReceiver);
     }
 
+    /**
+     * Goes back to the previous activity.
+     */
     public void back(View view) {
         finish();
     }
 
+    /**
+     * Checks if all the necessary information was entered, and if the user is creating a new customer, it passes this information to the next Activity, otherwise it updates the existing customer.
+     */
     public void upload(View view) {
         String fn = fname.getText().toString();
         String ln = lname.getText().toString();
@@ -167,6 +245,9 @@ public class Input extends AppCompatActivity {
         }
     }
 
+    /**
+     * Goes back to the previous activity when the application returns from the next activity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (data != null)

@@ -16,11 +16,34 @@ import android.widget.TextView;
 
 import java.util.List;
 
+
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an ArrayAdapter that is linked to an activity with the ListView and to the customers list.
+ */
 public class CustomerList extends ArrayAdapter<Customer> {
 
+    /**
+     * The activity which contains the ListView.
+     */
     private Activity context;
+    /**
+     * The list which contains the customers.
+     */
     private List<Customer> customerList;
 
+    /**
+     * A constructor of the Image class.
+     *
+     * This function creates a CustomerList ArrayAdapter with all the given parameters.
+     *
+     * @param context The activity which contains the ListView.
+     * @param customerList The list which contains the customers.
+     * @return A reference to the created CustomerList ArrayAdapter.
+     */
     public CustomerList(Activity context, List<Customer> customerList)
     {
         super(context, R.layout.list_layout, customerList);
@@ -28,6 +51,12 @@ public class CustomerList extends ArrayAdapter<Customer> {
         this.customerList = customerList;
     }
 
+    /**
+     * Sets up the view that will be displayed in each row of the ListView.
+     *
+     * @param position the index of the Customer in the list.
+     * @return the view which the ListView displays.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

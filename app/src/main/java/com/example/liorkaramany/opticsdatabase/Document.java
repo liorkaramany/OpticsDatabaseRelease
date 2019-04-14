@@ -41,34 +41,150 @@ import java.util.Date;
 
 import id.zelory.compressor.Compressor;
 
+/**
+ * @author Lior Karamany
+ * @version 1.0
+ * @since 1.0
+ *
+ * This class defines an activity which allows the user to capture a document and upload it along with the customer, or replace an existing document.
+ */
 public class Document extends AppCompatActivity {
 
+    /**
+     * An constant used for requesting the image from the camera.
+     */
     static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    /**
+     * An constant used for requesting to take a photo.
+     */
     static final int REQUEST_TAKE_PHOTO = 1;
 
-    ImageView img;
-    Button back, upload;
 
+    /**
+     * An ImageView that displays the captured document.
+     */
+    ImageView img;
+
+    /**
+     * A button used to go back to the previous activity.
+     */
+    Button back;
+
+    /**
+     * A button used to upload the captured document.
+     */
+    Button upload;
+
+    /**
+     * A Storage Reference to the image's location.
+     */
     StorageReference r;
+
+    /**
+     * A Database Reference to the customer that contains the captured document.
+     */
     DatabaseReference ref;
+
+    /**
+     * A Database Reference to the document that is captured.
+     */
     DatabaseReference imgRef;
 
+    /**
+     * A ProgressBar that shows the image uploading progress.
+     */
     ProgressBar progressBar;
 
+    /**
+     * The URI of the captured photo.
+     */
     Uri uri = null;
+
+    /**
+     * The Bitmap of the captured photo.
+     */
     Bitmap image = null;
 
+    /**
+     * The path of the captured photo.
+     */
     String mCurrentPhotoPath;
 
+    /**
+     * The Storage Task which maintains the document uploading process.
+     */
     StorageTask uploadTask;
 
-    String url, idFromIntent, imgId;
+    /**
+     * The URL of an existing document.
+     */
+    String url;
 
-    String fname, lname, customerID, address, city, phone, mobile;
-    int typeID, sign;
+    /**
+     * The ID of an existing document.
+     */
+    String idFromIntent;
 
+    /**
+     * The ID of the image of an existing document.
+     */
+    String imgId;
+
+    /**
+     * The first name of the customer.
+     */
+    String fname;
+
+    /**
+     * The last name of the customer.
+     */
+    String lname;
+
+    /**
+     * The personal ID of the customer.
+     */
+    String customerID;
+
+    /**
+     * The address of the customer.
+     */
+    String address;
+
+    /**
+     * The city of the customer.
+     */
+    String city;
+
+    /**
+     * The phone number of the customer.
+     */
+    String phone;
+
+    /**
+     * The phone number of the customer.
+     */
+    String mobile;
+
+    /**
+     * The type of equipment that the customer bought.
+     */
+    int typeID;
+
+    /**
+     * A sign which tells if a new customer is being uploaded, or if a new document is being added to a customer.
+     */
+    int sign;
+
+    /**
+     * The ConnectionReceiver listener that listens to the connectivity of the application.
+     */
     ConnectionReceiver connectionReceiver;
 
+
+    /**
+     * Initializes the activity, the widgets, the reference and the connectionReceiver, gets the information passed from the previous activity and sets them inside the appropriate variables.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +229,10 @@ public class Document extends AppCompatActivity {
         connectionReceiver = new ConnectionReceiver();
     }
 
+
+    /**
+     * Registers the receiver when the application resumes the activity.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -120,6 +240,9 @@ public class Document extends AppCompatActivity {
         registerReceiver(connectionReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    /**
+     * Unregisters the receiver when the application stops the activity.
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -127,6 +250,9 @@ public class Document extends AppCompatActivity {
         unregisterReceiver(connectionReceiver);
     }
 
+    /**
+     * Captures an image with the camera.
+     */
     public void capture(View view) {
 
         if (uploadTask != null)
@@ -155,6 +281,11 @@ public class Document extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates the file that contains the captured image.
+     *
+     * @return the file that contains the captured image.
+     */
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -171,6 +302,9 @@ public class Document extends AppCompatActivity {
         return image;
     }
 
+    /**
+     * Puts the image inside the ImageView once the image has been captured.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -189,6 +323,11 @@ public class Document extends AppCompatActivity {
 
     }
 
+    /**
+     * Obtains a Bitmap from the URI.
+     *
+     * @return the Bitmap from the URI.
+     */
     public Bitmap getBitmapFromUri() {
 
         getContentResolver().notifyChange(uri, null);
@@ -205,6 +344,14 @@ public class Document extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Rotates the image to the right orientation.
+     *
+     * @param bitmap the bitmap to be rotated.
+     * @param path the path of the captured image.
+     * @return the rotated Bitmap.
+     */
     private Bitmap imageOrientationValidator(Bitmap bitmap, String path) {
 
         ExifInterface ei;
@@ -230,6 +377,13 @@ public class Document extends AppCompatActivity {
         return bitmap;
     }
 
+    /**
+     * Rotates the Bitmap by a certain angle.
+     *
+     * @param source the Bitmap to rotate.
+     * @param angle the angle that the Bitmap will be rotated.
+     * @return the new Bitmap.
+     */
     private Bitmap rotateImage(Bitmap source, float angle) {
 
         Bitmap bitmap = null;
@@ -244,6 +398,9 @@ public class Document extends AppCompatActivity {
         return bitmap;
     }
 
+    /**
+     * Uploads the image as a document to the database and creates a new customer, or replaces an existing document with the new one.
+     */
     public void upload(View view) {
         if (uploadTask != null)
             Toast.makeText(this, getString(R.string.currently_uploading), Toast.LENGTH_LONG).show();
@@ -338,6 +495,9 @@ public class Document extends AppCompatActivity {
         }
     }
 
+    /**
+     * Goes back to the previous activity if a document isn't uploading.
+     */
     public void back(View view) {
         if (uploadTask != null)
             Toast.makeText(this, getString(R.string.image_uploaded), Toast.LENGTH_LONG).show();
@@ -345,6 +505,9 @@ public class Document extends AppCompatActivity {
             finish();
     }
 
+    /**
+     * Goes back to the previous activity if a document isn't uploading.
+     */
     @Override
     public void onBackPressed()
     {
