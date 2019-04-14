@@ -42,7 +42,6 @@ public class CustomerList extends ArrayAdapter<Customer> {
      *
      * @param context The activity which contains the ListView.
      * @param customerList The list which contains the customers.
-     * @return A reference to the created CustomerList ArrayAdapter.
      */
     public CustomerList(Activity context, List<Customer> customerList)
     {

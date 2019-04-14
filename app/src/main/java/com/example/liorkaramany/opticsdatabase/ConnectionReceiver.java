@@ -27,8 +27,6 @@ public class ConnectionReceiver extends BroadcastReceiver {
      * A constructor of the ConnectionReceiver class.
      *
      * This function creates a ConnectionReceiver and sets the hasDisplayed flag to false.
-     *
-     * @return A reference to the created ConnectionReceiver.
      */
     public ConnectionReceiver()
     {
@@ -40,7 +38,6 @@ public class ConnectionReceiver extends BroadcastReceiver {
      *
      * @param context the context in which the dialog will be shown.
      * @param intent the intent that is received from the context.
-     * @return the view which the ListView displays.
      */
     @Override
     public void onReceive(Context context, Intent intent) {

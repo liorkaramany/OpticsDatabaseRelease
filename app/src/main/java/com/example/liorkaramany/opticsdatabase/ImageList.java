@@ -47,7 +47,6 @@ public class ImageList extends ArrayAdapter<Image> {
      *
      * @param context The activity which contains the ListView.
      * @param imageList The list which contains the images.
-     * @return A reference to the created ImageList ArrayAdapter.
      */
     public ImageList(Activity context, List<Image> imageList)
     {

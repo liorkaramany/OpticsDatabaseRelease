@@ -75,7 +75,6 @@ public class Customer {
      * @param phone The phone number of the customer.
      * @param mobile The mobile phone number of the customer.
      * @param typeID The type of equipment that the customer bought (glasses or lens).
-     * @return A reference to the created customer.
      */
     public Customer(String id, String fName, String lName, String customerID, String address, String city, String phone, String mobile, int typeID) {
         this.id = id;
@@ -108,7 +107,6 @@ public class Customer {
      * @param mobile The mobile phone number of the customer.
      * @param openDate The date when the customer was uploaded to the database.
      * @param typeID The type of equipment that the customer bought (glasses or lens).
-     * @return A reference to the created customer.
      */
     public Customer(String id, String fName, String lName, String customerID, String address, String city, String phone, String mobile, String openDate, int typeID) {
         this.id = id;

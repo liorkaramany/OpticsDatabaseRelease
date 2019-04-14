@@ -36,7 +36,6 @@ public class Image implements Serializable {
      *
      * @param id The ID of the image that is used to identify it in the database.
      * @param url The URL of the image.
-     * @return A reference to the created image.
      */
     public Image(String id, String url)
     {
