@@ -275,6 +275,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
             // and returned in the Activity's onRequestPermissionsResult()
             int PERMISSION_ALL = 1;
             String[] PERMISSIONS = {
+                    Manifest.permission.INTERNET,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     android.Manifest.permission.CAMERA
