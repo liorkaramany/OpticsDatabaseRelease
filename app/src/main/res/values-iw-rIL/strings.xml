@@ -25,7 +25,7 @@
         <item>עדשות</item>
     </string-array>
     <string name="mobile_number">טלפון נייד</string>
-    <string name="capture">צלם</string>
+    <string name="capture">צלם מסמך</string>
     <string name="currently_uploading">המסמך כרגע מועלה</string>
     <string name="no_enough_info">לא הכנסת את המידע הנחוץ</string>
     <string name="options_settings">אפשרויות</string>
@@ -55,5 +55,8 @@
     <string name="doc_deleted">המסמך נמחק</string>
     <string name="error">שגיאה</string>
     <string name="no_connection">אין חיבור לאינטרנט</string>
+    <string name="search_customers">חפש לקוחות</string>
+    <string name="type_of_product">סוג המוצר</string>
+    <string name="next">הבא</string>
 
 </resources>

@@ -19,7 +19,7 @@
     <string name="back">Back</string>
     <string name="upload">Upload</string>
     <string name="mobile_number">Mobile number</string>
-    <string name="capture">Capture</string>
+    <string name="capture">Capture Document</string>
     <string name="currently_uploading">The document is currently being uploaded</string>
     <string name="no_enough_info">You haven\'t entered the necessary information</string>
     <string name="customer_edited">Customer has been edited</string>
@@ -54,4 +54,7 @@
     <string name="doc_deleted">The document has been deleted</string>
     <string name="error">Error</string>
     <string name="no_connection">There is no internet connection</string>
+    <string name="search_customers">Search customers</string>
+    <string name="type_of_product">Type of product</string>
+    <string name="next">Next</string>
 </resources>
