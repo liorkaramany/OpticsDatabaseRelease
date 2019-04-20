@@ -410,7 +410,7 @@ public class Document extends AppCompatActivity {
                 final String id;
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+                image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data = baos.toByteArray();
 
                 StorageReference tmpRef;
