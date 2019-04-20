@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -16,26 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.ContextMenu;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,15 +37,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Lior Karamany
@@ -114,6 +102,11 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
      * The list which contains all the customer's documents.
      */
     int optionSpinner;
+
+    /**
+     * A flag which tells the user's position (employee or a manager).
+     */
+    boolean isManager;
 
     /**
      * The ConnectionReceiver listener that listens to the connectivity of the application.
@@ -286,6 +279,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
             }
         }
 
+        isManager = false;
+
         connectionReceiver = new ConnectionReceiver();
     }
 
@@ -373,7 +368,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
     /**
-     * Shows the options to view the selected customer, view the documents of a customer, edit him or delete him when the user long-presses on a customer in the list.
+     * Shows the options to view the selected customer, view the documents of a customer, edit him or delete him (only if the user is a manager) when the user long-presses on a customer in the list.
      */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -382,7 +377,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         menu.setHeaderTitle(getString(R.string.options_settings));
         menu.add(getString(R.string.view_document));
         menu.add(getString(R.string.edit_details));
-        menu.add(getString(R.string.delete));
+        if (isManager)
+            menu.add(getString(R.string.delete));
     }
 
     /**
@@ -477,6 +473,7 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
 
         Intent t = new Intent(this, DocumentsList.class);
         t.putExtra("id", id);
+        t.putExtra("isManager", isManager);
         startActivity(t);
 
         /*final List<Image> documents = new ArrayList<>();
@@ -560,18 +557,19 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     }
 
     /**
-     * Displays options when the user clicks the options button.
+     * Displays the options to go to the credits or to toggle between manager mode and employee mode when the user clicks the options button.
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         menu.add(getString(R.string.credits_option));
+        menu.add(getString(R.string.manager));
 
         return super.onCreateOptionsMenu(menu);
     }
 
     /**
-     * Starts the Credits activity after the user selects the option in the options menu.
+     * Starts the Credits activity after the user selects the option in the options menu, or switches between an employee and a manager.
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -580,6 +578,22 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
         {
             Intent t = new Intent(this, Credits.class);
             startActivity(t);
+        }
+        else
+        {
+            isManager = !isManager;
+
+            LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+            Snackbar snackbar;
+            if (isManager) {
+                item.setTitle(getString(R.string.employee));
+                snackbar = Snackbar.make(layout, R.string.manager_message, Snackbar.LENGTH_LONG);
+            }
+            else {
+                item.setTitle(getString(R.string.manager));
+                snackbar = Snackbar.make(layout, R.string.employee_message, Snackbar.LENGTH_LONG);
+            }
+            snackbar.show();
         }
 
         return super.onOptionsItemSelected(item);

@@ -58,5 +58,9 @@
     <string name="search_customers">חפש לקוחות</string>
     <string name="type_of_product">סוג המוצר</string>
     <string name="next">הבא</string>
+    <string name="employee">מצב עובד</string>
+    <string name="manager">מצב מנהל</string>
+    <string name="employee_message">אתה כרגע במצב עובד</string>
+    <string name="manager_message">אתה כרגע במצב מנהל</string>
 
 </resources>

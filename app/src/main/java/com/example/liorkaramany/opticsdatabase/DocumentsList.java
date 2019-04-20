@@ -65,9 +65,14 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
      */
     ConnectionReceiver connectionReceiver;
 
+    /**
+     * A flag which tells the user's position (employee or a manager).
+     */
+    boolean isManager;
+
 
     /**
-     * Initializes the activity, the widgets, the references and the connectionReceiver, gets the ID of the customer from the previous activity and assigns the listeners to the ListView.
+     * Initializes the activity, the widgets, the references and the connectionReceiver, gets the ID of the customer and the position of the user from the previous activity and assigns the listeners to the ListView.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,7 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_documents_list);
 
         String id = getIntent().getStringExtra("id");
+        isManager = getIntent().getBooleanExtra("isManager", false);
 
         ref = FirebaseDatabase.getInstance().getReference("images").child(id);
         imgRef = FirebaseStorage.getInstance().getReference("customers").child(id);
@@ -204,7 +210,7 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
     }
 
     /**
-     * Shows the options to view the selected document, edit it or delete it when the user long-presses on a document in the list.
+     * Shows the options to view the selected document, edit it or delete it (only if the user is a manager) when the user long-presses on a document in the list.
      */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -213,7 +219,8 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         menu.setHeaderTitle(getString(R.string.options_settings));
         //menu.add(getString(R.string.view_document));
         menu.add(getString(R.string.edit));
-        menu.add(getString(R.string.delete));
+        if (isManager)
+            menu.add(getString(R.string.delete));
     }
 
 

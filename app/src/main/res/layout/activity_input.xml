@@ -27,7 +27,7 @@
             android:id="@+id/fname"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="@string/first_name_input" />
@@ -52,7 +52,7 @@
             android:id="@+id/lname"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:ems="10"
             android:hint="@string/last_name_input"
             android:inputType="textPersonName" />
@@ -76,7 +76,7 @@
             android:id="@+id/customerID"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="2"
             android:ems="10"
             android:hint="@string/customer_id_input"
             android:inputType="number" />
@@ -100,7 +100,7 @@
             android:id="@+id/address"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="2"
             android:ems="10"
             android:hint="@string/address"
             android:inputType="textPostalAddress" />
@@ -124,7 +124,7 @@
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:ems="10"
             android:hint="@string/city"
             android:inputType="textPostalAddress" />
@@ -148,7 +148,7 @@
             android:id="@+id/phone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.5"
+            android:layout_weight="1.7"
             android:ems="10"
             android:hint="@string/phone_number_input"
             android:inputType="phone" />
@@ -172,7 +172,7 @@
             android:id="@+id/mobile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.25"
+            android:layout_weight="1.7"
             android:ems="10"
             android:hint="@string/mobile_number"
             android:inputType="phone" />
