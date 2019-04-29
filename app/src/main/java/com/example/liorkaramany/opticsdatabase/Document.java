@@ -462,20 +462,14 @@ public class Document extends AppCompatActivity {
                             }
                         }, 500);*/
 
-                        if (sign != 1) {
-                            //Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_SHORT).show();
-                            Intent intent = getIntent();
-                            /*intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);*/
-                            setResult(RESULT_OK, intent);
-                            finish();
+                        switch (sign) {
+                            case 0: Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_LONG).show(); break;
+                            case 1: Toast.makeText(Document.this, getString(R.string.doc_edited), Toast.LENGTH_LONG).show(); break;
+                            case 2: Toast.makeText(Document.this, getString(R.string.doc_uploaded), Toast.LENGTH_LONG).show(); break;
                         }
-                        else {
-                            //Toast.makeText(Document.this, getString(R.string.customer_edited), Toast.LENGTH_SHORT).show();
-                            Intent gt = getIntent();
-                            setResult(RESULT_OK, gt);
-                            finish();
-                        }
+                        Intent gt = getIntent();
+                        setResult(RESULT_OK, gt);
+                        finish();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

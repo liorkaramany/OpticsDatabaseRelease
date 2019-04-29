@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -744,16 +745,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemSelecte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
-            Snackbar snackbar;
-            if (requestCode < 3) {
-                LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-                snackbar = Snackbar.make(layout, R.string.customer_edited, Snackbar.LENGTH_LONG);
-            }
-            else {
-                LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-                snackbar = Snackbar.make(layout, R.string.customer_uploaded, Snackbar.LENGTH_LONG);
-            }
-            snackbar.show();
+            if (requestCode < 3)
+                Toast.makeText(this, R.string.customer_edited, Toast.LENGTH_LONG).show();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
