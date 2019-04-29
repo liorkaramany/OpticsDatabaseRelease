@@ -499,21 +499,7 @@ public class Document extends AppCompatActivity {
      * Goes back to the previous activity if a document isn't uploading.
      */
     public void back(View view) {
-        if (uploadTask != null)
-            Toast.makeText(this, getString(R.string.image_uploaded), Toast.LENGTH_LONG).show();
-        else
-            finish();
+        finish();
     }
 
-    /**
-     * Goes back to the previous activity if a document isn't uploading.
-     */
-    @Override
-    public void onBackPressed()
-    {
-        if (uploadTask != null)
-            Toast.makeText(this, getString(R.string.image_uploaded), Toast.LENGTH_LONG).show();
-        else
-            super.onBackPressed();
-    }
 }
