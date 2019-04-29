@@ -271,17 +271,6 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         if (data != null) {
             if (resultCode == RESULT_OK) {
                 updateList();
-                LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
-                Snackbar snackbar = null;
-                switch (requestCode) {
-                    case 3:
-                        snackbar = Snackbar.make(layout, R.string.doc_uploaded, Snackbar.LENGTH_LONG);
-                        break;
-                    case 2:
-                        snackbar = Snackbar.make(layout, R.string.doc_edited, Snackbar.LENGTH_LONG);
-                        break;
-                }
-                snackbar.show();
             }
         }
     }
