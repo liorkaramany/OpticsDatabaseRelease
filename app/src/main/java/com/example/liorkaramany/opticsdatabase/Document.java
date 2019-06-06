@@ -454,14 +454,6 @@ public class Document extends AppCompatActivity {
                             }
                         });
 
-                        /*Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setProgress(0);
-                            }
-                        }, 500);*/
-
                         switch (sign) {
                             case 0: Toast.makeText(Document.this, getString(R.string.customer_uploaded), Toast.LENGTH_LONG).show(); break;
                             case 1: Toast.makeText(Document.this, getString(R.string.doc_edited), Toast.LENGTH_LONG).show(); break;

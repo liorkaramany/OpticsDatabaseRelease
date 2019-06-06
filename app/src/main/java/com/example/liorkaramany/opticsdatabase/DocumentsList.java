@@ -173,7 +173,7 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
 
         PhotoView document = dialogView.findViewById(R.id.document);
 
-//Fit the image into the document ImageView.
+        //Fit the image into the document ImageView.
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
@@ -196,11 +196,6 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         adb.setPositiveButton(R.string.edit, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                /*Intent t = new Intent(DocumentsList.this, Document.class);
-                t.putExtra("url", url);
-                t.putExtra("id", imgId);
-                t.putExtra("sign", 1);
-                startActivityForResult(t, 2);*/
                 editDocument(current);
             }
         });
@@ -217,7 +212,6 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         super.onCreateContextMenu(menu, v, menuInfo);
 
         menu.setHeaderTitle(getString(R.string.options_settings));
-        //menu.add(getString(R.string.view_document));
         menu.add(getString(R.string.edit));
         if (isManager)
             menu.add(getString(R.string.delete));
@@ -233,8 +227,6 @@ public class DocumentsList extends AppCompatActivity implements AdapterView.OnIt
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
         final Image image = documents.get(index);
-        //String id = image.getId();
-        //String url = image.getUrl();
 
         String option = item.getTitle().toString();
         if (option.equals(getString(R.string.delete)))

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">OpticsDatabase</string>
-    <string name="credits">This application is made by Lior Karamany.\n\nThe mentor teachers are Itzik Ben-Shitrit and Albert Levy.</string>
+    <string name="credits">This application is made by Lior Karamany.  The mentor teachers are Itzik Ben-Shitrit and Albert Levy. Phone number: 0526779903</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="id">ID</string>
